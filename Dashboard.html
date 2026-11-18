@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Set the page encoding, phone layout, title, and shared local files. -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | RAISE-UP</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <!-- Main wrapper keeps the page centered and gives all pages the same layout. -->
+  <div class="page">
+    <!-- Shared site header: logo, page links, and a simple user greeting. -->
+    <header class="site-header">
+      <!-- The hand-drawn SVG mark avoids needing a logo image download. -->
+      <a class="brand" href="Dashboard.html" title="Go to Dashboard">
+      <img src=".\img\raise-up.png" alt="RAISE-UP logo" class="brand-logo">
+        <span>RAISE-UP</span>
+      </a>
+      <nav class="main-nav" aria-label="Main Navigation">
+        <a class="nav-link active" href="Dashboard.html" aria-current="page">Dashboard</a>
+        <a class="nav-link" href="Calculator.html">Calculator</a>
+        <a class="nav-link" href="About.html">About</a>
+      </nav>
+      <div class="user-greeting">
+        <div class="user-avatar" aria-hidden="true">U</div>
+        <p class="greeting-text">Hello!<strong>User</strong></p>
+      </div>
+    </header>
+
+    <!-- JavaScript fills this message when a filter or calculation is used. -->
+    <div id="toast-banner" class="toast-banner" role="status" aria-live="polite">
+      <span class="toast-dot"></span>
+      <span id="toast-message">Dashboard updated with new calculation!</span>
+    </div>
+
+    <main>
+      <!-- Dashboard title and controls for choosing a projection length. -->
+      <div class="dashboard-heading">
+        <div>
+          <h1 class="page-heading">Dashboard Overview</h1>
+          <p class="page-subtitle">Monitor your Compound Interest Journey</p>
+        </div>
+        <div class="filter-controls">
+          <select id="timeframe-select" class="select-control" aria-label="Select Timeframe">
+            <option value="" disabled selected>Choose timeframe</option>
+            <option value="1">This Month</option>
+            <option value="3">3 Months</option>
+            <option value="6">6 Months</option>
+            <option value="12">1 Year</option>
+          </select>
+          <button id="dashboard-filter" class="filter-button" type="button">Filter</button>
+        </div>
+      </div>
+
+      <!-- These four cards show the latest totals and rates from the calculator. -->
+      <section class="metrics-grid" aria-label="Key Financial Metrics">
+        <article class="metric-card metric-card-blue">
+          <div class="metric-card-top">
+            <span>Total Revenue</span>
+            <span class="metric-icon" aria-hidden="true">₱</span>
+          </div>
+          <div id="dash-total-revenue" class="metric-value">₱5,056.57</div>
+          <div id="dash-last-month-diff" class="metric-note">+ ₱37.50 from last month</div>
+        </article>
+
+        <article class="metric-card">
+          <div class="metric-card-top">
+            <span>Growth</span>
+            <span class="metric-icon green" aria-hidden="true">↗</span>
+          </div>
+          <div id="dash-growth-val" class="metric-value green-text">₱37.50</div>
+          <div id="dash-growth-sub" class="metric-note">+3 Months of Progress</div>
+        </article>
+
+        <article class="metric-card">
+          <div class="metric-card-top">
+            <span>Everyday</span>
+            <span class="metric-icon blue" aria-hidden="true">→</span>
+          </div>
+          <div>
+            <div id="dash-daily-val" class="metric-value blue-text">₱0.62</div>
+            <div class="daily-label">per day</div>
+          </div>
+        </article>
+
+        <article class="metric-card">
+          <div class="metric-card-top">
+            <span>Interest Rate</span>
+            <span class="metric-icon dark" aria-hidden="true">%</span>
+          </div>
+          <div id="dash-rate-val" class="metric-value">4.5%</div>
+          <div class="metric-note">&nbsp;</div>
+        </article>
+      </section>
+
+      <!-- Left: graph/table projection. Right: total interest and calculator link. -->
+      <section class="dashboard-bottom">
+        <article class="content-card">
+          <!-- The badge is updated to match the currently selected month count. -->
+          <div class="chart-heading">
+            <p class="card-label">Growth Projection</p>
+            <span id="chart-range-badge" class="chart-badge">3-Month Compound Curve</span>
+          </div>
+          <!-- These buttons switch between the chart and its month-by-month data. -->
+          <div class="projection-tabs" role="tablist" aria-label="Growth projection view">
+            <button id="graph-tab" class="projection-tab active" type="button" role="tab" aria-selected="true" aria-controls="graph-panel">Graph</button>
+            <button id="table-tab" class="projection-tab" type="button" role="tab" aria-selected="false" aria-controls="table-panel">Monthly Table</button>
+          </div>
+          <!-- JavaScript draws the filled SVG chart inside this empty SVG element. -->
+          <div id="graph-panel" class="chart-box projection-panel" role="tabpanel" aria-labelledby="graph-tab">
+            <svg id="growth-line-chart" viewBox="0 0 600 300" preserveAspectRatio="none" role="img" aria-label="Chart showing investment amount and interest earned over time"></svg>
+          </div>
+          <!-- JavaScript creates one table row for each projected month. -->
+          <div id="table-panel" class="monthly-table-box projection-panel" role="tabpanel" aria-labelledby="table-tab" hidden>
+            <table class="monthly-table">
+              <thead>
+                <tr>
+                  <th scope="col">Month</th>
+                  <th scope="col">Added</th>
+                  <th scope="col">Total Invested</th>
+                  <th scope="col">Interest Earned</th>
+                  <th scope="col">Total Value</th>
+                </tr>
+              </thead>
+              <tbody id="monthly-table-body"></tbody>
+            </table>
+          </div>
+        </article>
+
+        <!-- Summary card for interest earned, linked to the calculator page. -->
+        <article class="content-card">
+          <p class="card-label">Revenue Analytics</p>
+          <h2 class="earned-title">Total Earned:</h2>
+          <div id="dash-total-earned-pill" class="earned-pill">₱56.57</div>
+          <p class="card-center">
+            <a class="text-link" href="Calculator.html">Adjust principal, rate, or months in Calculator →</a>
+          </p>
+        </article>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

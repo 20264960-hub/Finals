@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Page metadata and references to the project's local shared files. -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | RAISE-UP</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <!-- Shared wrapper and header keep the About page consistent with the others. -->
+  <div class="page">
+    <header class="site-header">
+      <a class="brand" href="Dashboard.html" title="Go to Dashboard">
+      <img src=".\img\raise-up.png" alt="RAISE-UP logo" class="brand-logo">
+        <span>RAISE-UP</span>
+      </a>
+      <nav class="main-nav" aria-label="Main Navigation">
+        <a class="nav-link" href="Dashboard.html">Dashboard</a>
+        <a class="nav-link" href="Calculator.html">Calculator</a>
+        <a class="nav-link active" href="About.html" aria-current="page">About</a>
+      </nav>
+      <div class="user-greeting">
+        <div class="user-avatar" aria-hidden="true">U</div>
+        <p class="greeting-text">Hello!<strong>User</strong></p>
+      </div>
+    </header>
+
+    <div id="toast-banner" class="toast-banner" role="status" aria-live="polite">
+      <span class="toast-dot"></span>
+      <span id="toast-message">Calculation complete.</span>
+    </div>
+
+    <main>
+      <!-- Educational text and the Rule of 72 illustration. -->
+      <section class="about-content">
+        <h1 class="page-heading">What is Compound Interest Investment?</h1>
+        <div class="about-grid">
+          <article class="info-card">
+            <!-- Explanation and the source used for the compound-interest summary. -->
+            <h2>What is Compound Interest?</h2>
+            <p>At its simplest, it is the interest you earn not only on your initial principal (the money you first put in) but also on the accumulated interest from previous periods.</p>
+            <p class="source-label">Source:</p>
+            <a class="source-link" href="https://www.bpi.com.ph/about-bpi/news/how-compound-interest-works-and-why-its-a-game-changer-for-investors" target="_blank" rel="noopener noreferrer">https://www.bpi.com.ph/about-bpi/news/how-compound-interest-works-and-why-its-a-game-changer-for-investors</a>
+            <p class="purpose-note">The purpose of this website is to help newcomers learn about a simple concept of investment.</p>
+          </article>
+
+          <article class="info-card">
+            <!-- Display the original Rule of 72 graphic at the card's responsive width. -->
+            <img
+              class="rule-image"
+              src="https://www.stlouisfed.org/-/media/project/frbstl/stlouisfed/publications/page-one/images/uploads/2026/2026-nov-poe-fig2.png?sc_lang=en&amp;hash=5FA38801DE698C8ADE9E9C28DD40B0B8"
+              alt="Understanding the Rule of 72, with examples of estimated years to double money at different interest rates"
+            >
+          </article>
+        </div>
+      </section>
+
+      <!-- Small copyright footer for the educational page. -->
+      <footer class="site-footer">
+        <p>© Copyright 2025. All rights reserved.</p>
+        <p>Made with love</p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

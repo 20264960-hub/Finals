@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Page metadata plus shared local CSS and JavaScript files. -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator | RAISE-UP</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <!-- Shared centered page wrapper and navigation header. -->
+  <div class="page">
+    <header class="site-header">
+      <a class="brand" href="Dashboard.html" title="Go to Dashboard">
+      <img src=".\img\raise-up.png" alt="RAISE-UP logo" class="brand-logo">
+        <span>RAISE-UP</span>
+      </a>
+      <nav class="main-nav" aria-label="Main Navigation">
+        <a class="nav-link" href="Dashboard.html">Dashboard</a>
+        <a class="nav-link active" href="Calculator.html" aria-current="page">Calculator</a>
+        <a class="nav-link" href="About.html">About</a>
+      </nav>
+      <div class="user-greeting">
+        <div class="user-avatar" aria-hidden="true">U</div>
+        <p class="greeting-text">Hello!<strong>User</strong></p>
+      </div>
+    </header>
+
+    <!-- JavaScript shows validation and calculation messages here. -->
+    <div id="toast-banner" class="toast-banner" role="status" aria-live="polite">
+      <span class="toast-dot"></span>
+      <span id="toast-message">Calculation complete.</span>
+    </div>
+
+    <main>
+      <!-- Calculator inputs are on the left; a live summary is on the right. -->
+      <div class="calculator-layout">
+        <section class="calculator-card">
+          <h1 class="calculator-title">Compounding<br>Calculator</h1>
+          <!-- Submitting this form runs the calculation in the shared script.js. -->
+          <form id="calculator-form" class="calculator-form">
+            <!-- Starting deposit is the principal in the compound-interest formula. -->
+            <div>
+              <label class="form-label" for="calc-amount">Amount</label>
+              <div class="input-pill">
+                <span class="currency-symbol">₱</span>
+                <input class="amount-input" id="calc-amount" type="number" step="any" min="1" value="5000" required>
+              </div>
+            </div>
+            <!-- Annual interest rate and length of the investment in months. -->
+            <div class="input-row">
+              <div>
+                <label class="form-label" for="calc-interest">Interest</label>
+                <div class="input-pill">
+                  <input id="calc-interest" type="number" step="0.01" min="0" max="100" value="4.5" required>
+                  <span class="percent-symbol">%</span>
+                </div>
+              </div>
+              <div>
+                <label class="form-label" for="calc-months">Months</label>
+                <div class="input-pill">
+                  <input class="month-input" id="calc-months" type="number" step="1" min="1" max="600" value="3" required>
+                </div>
+              </div>
+            </div>
+            <!-- Optional contributions and the interval when interest is added. -->
+            <div class="recurring-section">
+              <h2 class="recurring-title">Regular Addition</h2>
+              <p class="recurring-help">Contributions are added at the end of each selected period.</p>
+              <div class="input-row">
+                <div>
+                  <label class="form-label" for="calc-addition">Amount to Add</label>
+                  <div class="input-pill">
+                    <span class="currency-symbol">₱</span>
+                    <input class="amount-input" id="calc-addition" type="number" step="any" min="0" value="0" required>
+                  </div>
+                </div>
+                <div>
+                  <label class="form-label" for="calc-addition-frequency">Add</label>
+                  <div class="select-pill">
+                    <select id="calc-addition-frequency">
+                      <option value="weekly">Weekly</option>
+                      <option value="biweekly">Bi-weekly</option>
+                      <option value="monthly" selected>Monthly</option>
+                      <option value="quarterly">Quarterly</option>
+                      <option value="yearly">Yearly</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <label class="form-label" for="calc-compounding">Interest is Compounded</label>
+                <div class="select-pill">
+                  <select id="calc-compounding">
+                    <option value="daily">Daily</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly" selected>Monthly</option>
+                    <option value="quarterly">Quarterly</option>
+                    <option value="semiannual">Twice a Year</option>
+                    <option value="yearly">Yearly</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <!-- Submit button triggers validation, calculation, and result updates. -->
+            <button class="calculate-button" type="submit">Calculate</button>
+          </form>
+        </section>
+
+        <!-- These values update after calculation and match the dashboard totals. -->
+        <section class="summary-list" aria-label="Calculation Summary">
+          <article class="summary-card summary-card-blue">
+            <div class="summary-title">
+              <span>Total</span>
+              <span class="metric-icon" aria-hidden="true">₱</span>
+            </div>
+            <div id="calc-res-total" class="summary-value">₱5,000</div>
+          </article>
+          <article class="summary-card">
+            <div class="summary-title">
+              <span>Interest Rate</span>
+              <span class="metric-icon dark" aria-hidden="true">%</span>
+            </div>
+            <div id="calc-res-rate" class="summary-value">4.5%</div>
+          </article>
+          <article class="summary-card">
+            <div class="summary-title">
+              <span>Earnings per Month</span>
+              <span class="metric-icon green" aria-hidden="true">↗</span>
+            </div>
+            <div id="calc-res-monthly" class="summary-value green-text">₱37.50</div>
+            <div id="calc-res-earned-note" class="metric-note">Total earned: ₱56.57</div>
+          </article>
+        </section>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,966 @@
+/* Use predictable sizing: padding and borders are included inside set widths. */
+* {
+  box-sizing: border-box;
+}
+
+/* Set the default font, page color, and remove the browser's default margin. */
+body {
+  margin: 0;
+  background: #ffffff;
+  color: #111827;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Make form controls use the same font as the rest of the page. */
+button,
+input,
+select {
+  font: inherit;
+}
+
+/* Remove the bright tap flash shown by some mobile browsers. */
+button,
+a,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Center the page, limit its width, and stack the header above its contents. */
+.page {
+  width: min(1140px, calc(100% - 40px));
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 28px 0 36px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Rounded shared header containing the brand, navigation, and greeting. */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  min-height: 66px;
+  margin-bottom: 32px;
+  padding: 10px 24px;
+  border: 1px solid #eceef1;
+  border-radius: 40px;
+  background: #f7f8fa;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+/* Keep the logo and brand text aligned and remove link underlining. */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #111827;
+  font-size: 18px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+/* Size the small vector logo in the shared header. */
+.brand-icon {
+  width: 30px;
+  height: 30px;
+}
+
+/* Place the three page links in a horizontal row. */
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Style inactive navigation links as rounded pills. */
+.nav-link {
+  padding: 11px 22px;
+  border-radius: 24px;
+  color: #555d69;
+  font-size: 14px;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+/* Give a navigation link feedback while the pointer is over it. */
+.nav-link:hover {
+  background: #e9ebef;
+  color: #111827;
+}
+
+/* Highlight the link for the page currently being viewed. */
+.nav-link.active {
+  background: #256ff6;
+  color: #ffffff;
+  box-shadow: 0 3px 8px rgba(37, 111, 246, 0.2);
+}
+
+/* Align the initials circle next to the greeting text. */
+.user-greeting {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Draw a local initials avatar instead of loading an online profile image. */
+.user-avatar {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #dce9ff;
+  color: #1453dc;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* Format the greeting and keep it compact within the header. */
+.greeting-text {
+  margin: 0;
+  color: #777f8a;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* Place the user's name below the greeting. */
+.greeting-text strong {
+  display: block;
+  color: #111827;
+  font-size: 14px;
+}
+
+/* Let the main content use remaining page height and appear smoothly. */
+main {
+  flex: 1;
+  animation: fade-up 0.25s ease-out;
+}
+
+/* Start main content slightly lower, then move it into its final position. */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(7px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Shared large heading used by dashboard and about content. */
+.page-heading {
+  margin: 0;
+  color: #111111;
+  font-size: 34px;
+  line-height: 1.2;
+}
+
+/* Subheading under the dashboard title. */
+.page-subtitle {
+  margin: 8px 0 0;
+  color: #737b86;
+  font-size: 15px;
+}
+
+/* Arrange the dashboard heading and period controls on one row. */
+.dashboard-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 26px;
+}
+
+/* Keep timeframe selection and filter button together. */
+.filter-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Give both period controls matching size and rounded corners. */
+.select-control,
+.filter-button {
+  min-height: 42px;
+  border: 0;
+  border-radius: 24px;
+  cursor: pointer;
+}
+
+/* Light background for the timeframe dropdown. */
+.select-control {
+  padding: 0 18px;
+  background: #f3f4f6;
+  color: #555d69;
+}
+
+/* Primary blue style for the dashboard filter action. */
+.filter-button {
+  padding: 0 20px;
+  background: #256ff6;
+  color: #ffffff;
+  transition: background 0.2s ease;
+}
+
+/* Darken action buttons on hover so they look interactive. */
+.filter-button:hover,
+.calculate-button:hover {
+  background-color: #1453dc;
+}
+
+/* Slightly shrink action buttons while pressed. */
+.filter-button:active,
+.calculate-button:active {
+  transform: scale(0.98);
+}
+
+/* Show a visible outline around the input group currently being edited. */
+.input-pill:focus-within {
+  outline: 4px solid rgba(59, 130, 246, 0.35);
+}
+
+/* Hide the number-spinner arrows in WebKit-based browsers. */
+.input-pill input::-webkit-inner-spin-button,
+.input-pill input::-webkit-outer-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+}
+
+/* Hide number-spinner arrows in Firefox. */
+.input-pill input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Put the four dashboard metric cards in equal columns. */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+/* Shared light surface and rounded border for content cards. */
+.metric-card,
+.content-card,
+.info-card {
+  border: 1px solid #eceef1;
+  border-radius: 22px;
+  background: #f5f6f8;
+}
+
+/* Lay out each metric card's title, value, and note vertically. */
+.metric-card {
+  min-height: 148px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Blue gradient variation for the most prominent metric card. */
+.metric-card-blue {
+  border: 0;
+  background: linear-gradient(135deg, #256ff6, #1453dc);
+  color: white;
+  box-shadow: 0 10px 25px -8px rgba(37, 111, 246, 0.4);
+}
+
+/* Place the metric label on the left and its icon on the right. */
+.metric-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: #606875;
+  font-size: 14px;
+}
+
+/* Use pale text on the blue card so it stays readable. */
+.metric-card-blue .metric-card-top,
+.metric-card-blue .metric-note {
+  color: #e8f0ff;
+}
+
+/* Circular icon base shared by all metrics and summaries. */
+.metric-icon {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #1e62f5;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* Green icon variation represents growth. */
+.metric-icon.green {
+  background: #00b853;
+  color: #ffffff;
+}
+
+/* Blue icon variation represents the daily amount. */
+.metric-icon.blue {
+  background: #256ff6;
+  color: #ffffff;
+}
+
+/* Dark icon variation represents a percentage/rate. */
+.metric-icon.dark {
+  background: #111111;
+  color: #ffffff;
+}
+
+/* Emphasize the amount displayed in each metric card. */
+.metric-value {
+  margin: 8px 0;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+/* Color a positive growth value green. */
+.metric-value.green-text {
+  color: #00b853;
+}
+
+/* Color the daily earning value blue. */
+.metric-value.blue-text {
+  color: #256ff6;
+}
+
+/* Style small supporting information under a metric. */
+.metric-note {
+  color: #737b86;
+  font-size: 12px;
+}
+
+/* Label the daily figure below its numeric value. */
+.daily-label {
+  margin-top: -6px;
+  color: #256ff6;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+/* Split the lower dashboard into chart and earnings summary columns. */
+.dashboard-bottom {
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: 22px;
+}
+
+/* Add inner spacing to dashboard content panels. */
+.content-card {
+  padding: 22px;
+}
+
+/* Muted text used for card descriptions. */
+.card-label {
+  margin: 0;
+  color: #68717d;
+  font-size: 14px;
+}
+
+/* Align the projection title and its month-range badge. */
+.chart-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+/* Separate the chart/table controls from the view below them. */
+.projection-tabs {
+  display: flex;
+  align-items: stretch;
+  gap: 4px;
+  margin: 0 -22px 0;
+  padding: 0 22px;
+  border-bottom: 1px solid #dfe5e9;
+}
+
+/* Style each chart/table selector as a clickable tab. */
+.projection-tab {
+  min-height: 42px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 8px 8px 0 0;
+  background: #b7e7ec;
+  color: #173d54;
+  cursor: pointer;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Dark background identifies the currently selected projection tab. */
+.projection-tab.active {
+  background: #123b59;
+  color: #ffffff;
+}
+
+/* Keep keyboard users informed about which tab has focus. */
+.projection-tab:focus-visible {
+  outline: 3px solid #256ff6;
+  outline-offset: 2px;
+}
+
+/* Honor the HTML hidden attribute when switching projection panels. */
+.projection-panel[hidden] {
+  display: none;
+}
+
+/* Small label showing the projection's duration. */
+.chart-badge {
+  padding: 5px 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  background: #ffffff;
+  color: #68717d;
+  font-size: 11px;
+}
+
+/* Give the SVG chart a pale plotting area and enough room for axis labels. */
+.chart-box {
+  width: 100%;
+  height: 360px;
+  padding: 10px 4px 0 0;
+  border-radius: 0 0 16px 16px;
+  background: #f0f2f2;
+}
+
+/* Let the generated SVG chart fill its panel. */
+#growth-line-chart {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Let the monthly table scroll vertically if it has many rows. */
+.monthly-table-box {
+  width: 100%;
+  max-height: 360px;
+  overflow: auto;
+  border-radius: 0 0 16px 16px;
+  background: #ffffff;
+}
+
+/* Stretch the table across the panel and merge adjacent cell borders. */
+.monthly-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+/* Add spacing and subtle row separators to table cells. */
+.monthly-table th,
+.monthly-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #e5e9ed;
+  white-space: nowrap;
+}
+
+/* Keep column titles visible while scrolling the table. */
+.monthly-table th {
+  position: sticky;
+  top: 0;
+  background: #e7f7fa;
+  color: #173d54;
+  font-size: 13px;
+}
+
+/* Use readable muted text for monthly values. */
+.monthly-table td {
+  color: #485462;
+  font-size: 14px;
+}
+
+/* Emphasize the final total column in each row. */
+.monthly-table td:last-child {
+  color: #123b59;
+  font-weight: 700;
+}
+
+/* Typography and color for labels inside the SVG graph legend. */
+.chart-legend {
+  font-size: 12px;
+  fill: #173d54;
+}
+
+/* Typography and color for graph tick labels and month numbers. */
+.chart-axis-label {
+  font-size: 12px;
+  fill: #526170;
+}
+
+/* Larger text for the graph's vertical and horizontal axis titles. */
+.chart-axis-title {
+  font-size: 15px;
+  font-weight: 700;
+  fill: #173d54;
+}
+
+/* Emphasize the heading above the total-interest amount. */
+.earned-title {
+  margin: 8px 0 24px;
+  color: #00b853;
+  font-size: 28px;
+}
+
+/* Green rounded badge for total interest earned. */
+.earned-pill {
+  width: min(100%, 300px);
+  margin: 0 auto 24px;
+  padding: 24px;
+  border-radius: 60px;
+  background: #00b853;
+  color: #ffffff;
+  text-align: center;
+  font-size: 38px;
+  font-weight: 800;
+}
+
+/* Blue styling for links inside a dashboard card. */
+.text-link {
+  color: #256ff6;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Center a paragraph or link inside its card. */
+.card-center {
+  text-align: center;
+}
+
+/* Set calculator card and result-card column widths. */
+.calculator-layout {
+  width: min(920px, 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  align-items: stretch;
+  gap: 24px;
+}
+
+/* Dark gradient container for the calculator fields. */
+.calculator-card {
+  padding: 34px;
+  border-radius: 30px;
+  background: linear-gradient(125deg, #040714, #111b60 52%, #3542d7);
+  color: #ffffff;
+  box-shadow: 0 18px 40px -12px rgba(12, 20, 69, 0.5);
+}
+
+/* Large two-line title inside the calculator. */
+.calculator-title {
+  margin: 0 0 26px;
+  font-size: 40px;
+  line-height: 1.12;
+}
+
+/* Stack form sections and provide consistent vertical gaps. */
+.calculator-form {
+  display: grid;
+  gap: 20px;
+}
+
+/* Visually separate the optional recurring-contribution settings. */
+.recurring-section {
+  display: grid;
+  gap: 14px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+/* Title of the recurring-addition options. */
+.recurring-title {
+  margin: 0;
+  color: #ffffff;
+  font-size: 19px;
+}
+
+/* Small explanation below the recurring-addition title. */
+.recurring-help {
+  margin: -10px 0 0;
+  color: #dbe8ff;
+  font-size: 13px;
+}
+
+/* Place each form label above its input. */
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  color: #dbe8ff;
+  font-size: 15px;
+}
+
+/* Make dropdowns appear as rounded white input fields. */
+.select-pill {
+  min-height: 66px;
+  padding: 0 18px;
+  display: flex;
+  align-items: center;
+  border-radius: 40px;
+  background: #ffffff;
+}
+
+/* Remove browser decoration and fill the width of the dropdown container. */
+.select-pill select {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #173d54;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Show a focus outline when a dropdown is being used. */
+.select-pill:focus-within {
+  outline: 4px solid rgba(59, 130, 246, 0.35);
+}
+
+/* Put related form inputs side by side, with a wider first input. */
+.input-row {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 16px;
+}
+
+/* Rounded white background surrounding a calculator input. */
+.input-pill {
+  min-height: 66px;
+  padding: 0 22px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border-radius: 40px;
+  background: #ffffff;
+  color: #256ff6;
+}
+
+/* Remove default input borders and enlarge entered numeric values. */
+.input-pill input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #111827;
+  font-size: 30px;
+  font-weight: 800;
+}
+
+/* Color the initial amount and month inputs blue. */
+.input-pill .amount-input,
+.input-pill .month-input {
+  color: #256ff6;
+}
+
+/* Center the month count and color it green. */
+.input-pill .month-input {
+  color: #00b853;
+  text-align: center;
+}
+
+/* Make currency and percent symbols match the large input text. */
+.currency-symbol,
+.percent-symbol {
+  font-size: 30px;
+  font-weight: 800;
+}
+
+/* Full-width blue button that submits the calculator form. */
+.calculate-button {
+  width: 100%;
+  min-height: 60px;
+  margin-top: 6px;
+  border: 0;
+  border-radius: 36px;
+  background: linear-gradient(90deg, #1d5ceb, #3988ff);
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 21px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+/* Slightly raise the calculate button on hover. */
+.calculate-button:hover {
+  transform: translateY(-1px);
+}
+
+/* Stack the three result cards with equal spacing. */
+.summary-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Arrange a summary card's heading, value, and optional note. */
+.summary-card {
+  min-height: 138px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid #eceef1;
+  border-radius: 22px;
+  background: #f5f6f8;
+}
+
+/* Blue gradient style for the final amount summary. */
+.summary-card-blue {
+  border: 0;
+  background: linear-gradient(135deg, #256ff6, #1453dc);
+  color: #ffffff;
+}
+
+/* Align a summary label opposite its icon. */
+.summary-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: #606875;
+  font-size: 14px;
+}
+
+/* Lighten the summary heading on its blue background. */
+.summary-card-blue .summary-title {
+  color: #e8f0ff;
+}
+
+/* Emphasize a calculated result in a summary card. */
+.summary-value {
+  margin-top: 8px;
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+/* Highlight monthly interest earnings in green. */
+.summary-value.green-text {
+  color: #00b853;
+}
+
+/* Use white for the value on the blue total card. */
+.summary-card-blue .summary-value {
+  color: #ffffff;
+}
+
+/* Limit the About page width and center it. */
+.about-content {
+  width: min(960px, 100%);
+  margin: 0 auto;
+}
+
+/* Put the explanation and Rule of 72 cards side by side. */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+
+/* Give educational text panels the shared card surface. */
+.info-card {
+  padding: 26px;
+}
+
+/* Space the headings inside the educational cards. */
+.info-card h2 {
+  margin: 0 0 18px;
+  font-size: 21px;
+}
+
+/* Improve readability of explanatory paragraphs. */
+.info-card p {
+  color: #4b5563;
+  line-height: 1.65;
+}
+
+/* Emphasize the source label. */
+.source-label {
+  margin-bottom: 5px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* Keep the source link readable when it is long. */
+.source-link {
+  color: #647080;
+  overflow-wrap: anywhere;
+}
+
+/* Visually separate the About page's purpose statement. */
+.purpose-note {
+  margin-top: 30px;
+  padding-top: 16px;
+  border-top: 1px solid #e1e4e9;
+  font-style: italic;
+}
+
+/* Scale the original Rule of 72 image to fit its card without distortion. */
+.rule-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+}
+
+/* Center and soften the footer text. */
+.site-footer {
+  margin-top: 32px;
+  color: #737b86;
+  text-align: center;
+  font-size: 12px;
+}
+
+/* Separate the two footer lines slightly. */
+.site-footer p {
+  margin: 4px 0;
+}
+
+/* Position the temporary status message above the bottom-right corner. */
+.toast-banner {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 18px;
+  border-radius: 16px;
+  background: #111827;
+  color: #ffffff;
+  font-size: 14px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* Fade the status message in after JavaScript adds the visible class. */
+.toast-banner.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Green indicator dot inside the status message. */
+.toast-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #00b853;
+}
+
+/* At tablet widths, stack wide panels and reduce the metric grid to two columns. */
+@media (max-width: 800px) {
+  .metrics-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dashboard-bottom,
+  .calculator-layout,
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .site-header {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border-radius: 26px;
+  }
+
+  .main-nav {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    padding-top: 8px;
+    border-top: 1px solid #e6e8ec;
+  }
+}
+
+/* At phone widths, reduce outer spacing and stack compact layouts. */
+@media (max-width: 520px) {
+  .page {
+    width: calc(100% - 24px);
+    padding-top: 14px;
+  }
+
+  .site-header {
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .nav-link {
+    padding: 9px 13px;
+    font-size: 13px;
+  }
+
+  .dashboard-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .page-heading {
+    font-size: 28px;
+  }
+
+  .metric-card {
+    min-height: 138px;
+    padding: 16px;
+  }
+
+  .metric-value {
+    font-size: 25px;
+  }
+
+  .calculator-card {
+    padding: 24px 18px;
+    border-radius: 24px;
+  }
+
+  .calculator-title {
+    font-size: 34px;
+  }
+
+  .input-row {
+    gap: 10px;
+  }
+
+  .input-pill {
+    min-height: 58px;
+    padding: 0 14px;
+  }
+
+  .input-pill input,
+  .currency-symbol,
+  .percent-symbol {
+    font-size: 24px;
+  }
+
+  .select-pill {
+    min-height: 58px;
+    padding: 0 12px;
+  }
+
+  .select-pill select {
+    font-size: 14px;
+  }
+
+  .info-card,
+  .content-card {
+    padding: 18px;
+  }
+
+  .chart-box {
+    height: 220px;
+  }
+}
+
+  .brand-logo {
+    width: 30px;
+    height: 30px;
+  }
